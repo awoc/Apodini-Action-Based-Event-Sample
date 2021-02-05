@@ -6,24 +6,35 @@
 //
 
 import SwiftUI
+import SwiftUIRefresh
 
 struct ListView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ViewModel
     
-    var queries: [WeatherTracker] {
-        model.weatherQueries
+    @State private var isShowing = false
+    
+    init() {
+        UITableView.appearance().separatorStyle = .none
+        UITableViewCell.appearance().backgroundColor = UIColor.systemGray6
+        UITableView.appearance().backgroundColor = UIColor.systemGray6
     }
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(queries) { query in
+                ForEach(model.weatherQueries) { query in
                     NavigationLink(destination: WeatherDetailView(weatherTracker: query).environmentObject(model)) {
                         CellView(query: query)
                     }
                 }.onDelete(perform: delete(at:))
-                
-            }.navigationBarTitle("Watch List")
+            }.pullToRefresh(isShowing: $isShowing) {
+                model
+                    .fetchData()
+                    .first()
+                    .sink { self.isShowing = false }
+                    .store(in: &model.subscriptions)
+            }
+            .navigationBarTitle("Watch List")
         }
     }
     

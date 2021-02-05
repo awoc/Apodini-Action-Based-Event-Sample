@@ -10,17 +10,29 @@ import SwiftUI
 struct WeatherDetailView: View {
     var weatherTracker: WeatherTracker
     
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        VStack {
-            if (model.shouldPresentView) {
-                Text("\(model.weatherResponse?.main.temp ?? 0.0)")
+        ScrollView {
+            ZStack {
+                Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderView(weatherTracker: weatherTracker)
+                        .environmentObject(model)
+                    NotificationView(weatherTracker: weatherTracker)
+                        .environmentObject(model)
+                    CurrentTemperatureView()
+                        .environmentObject(model)
+                    DetailTemperatureView()
+                        .environmentObject(model)
+                    OtherMeasurementView(weatherTracker: weatherTracker)
+                        .environmentObject(model)
+                    Spacer()
+                }
             }
-        }.onAppear {
+        }
+       .onAppear {
             model.getWeather(weatherTracker)
-        }.onDisappear {
-            model.shouldPresentView = false
         }
     }
 }

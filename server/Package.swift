@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop")),
+        .package(url: "https://github.com/Apodini/Apodini.git", .branch("refactor-notification-center")),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0")
     ],
     targets: [
@@ -31,7 +31,11 @@ let package = Package(
                 .product(name: "Notifications", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client")
-            ]),
+            ],
+            resources: [
+                .process("Certificates")
+            ]
+        ),
         .testTarget(
             name: "serverTests",
             dependencies: ["server"]),

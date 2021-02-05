@@ -23,8 +23,8 @@
         "package": "Apodini",
         "repositoryURL": "https://github.com/Apodini/Apodini.git",
         "state": {
-          "branch": "develop",
-          "revision": "338ea6614b75d72096dd77459a7c31419835a4d4",
+          "branch": "refactor-notification-center",
+          "revision": "f46fce34293f225bf5bb3749ea0d57a098b89b98",
           "version": null
         }
       },

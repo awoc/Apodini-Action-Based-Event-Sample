@@ -1,6 +1,5 @@
 import Fluent
 
-// An example migration.
 struct WeatherMigration: Migration {
     func prepare(on database: Fluent.Database) -> EventLoopFuture<Void> {
         database.eventLoop.flatten([
@@ -11,8 +10,10 @@ struct WeatherMigration: Migration {
                 .field("measurement", .string, .required)
                 .field("notification_interval", .string, .required)
                 .field("date", .date, .required)
+                .field("day_of_week", .int, .required)
                 .field("informing", .bool, .required)
                 .field("temperature", .int, .required)
+                .field("condition", .string, .required)
                 .create()
         ])
     }

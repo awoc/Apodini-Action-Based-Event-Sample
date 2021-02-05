@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC24CB9325CC8B280043BCE7 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24CB9225CC8B280043BCE7 /* NotificationView.swift */; };
+		DC24CB9925CCA4060043BCE7 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = DC24CB9825CCA4060043BCE7 /* SwiftUIRefresh */; };
+		DC27F67525CB4F2E007C3164 /* OtherMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F67425CB4F2E007C3164 /* OtherMeasurementView.swift */; };
+		DC2DF0C425CAC85800366D10 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DF0C325CAC85800366D10 /* HeaderView.swift */; };
+		DC2DF0C925CAC8DD00366D10 /* CurrentTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DF0C825CAC8DD00366D10 /* CurrentTemperatureView.swift */; };
 		DC61077525C6F02600B4D62E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61077425C6F02600B4D62E /* AppDelegate.swift */; };
 		DC61077725C6F02600B4D62E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61077625C6F02600B4D62E /* SceneDelegate.swift */; };
 		DC61077925C6F02600B4D62E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61077825C6F02600B4D62E /* ContentView.swift */; };
@@ -23,12 +28,13 @@
 		DC6107F925C7265300B4D62E /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6107F825C7265300B4D62E /* PrimaryButton.swift */; };
 		DC61081B25C7605700B4D62E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61081A25C7605700B4D62E /* ListView.swift */; };
 		DC61082025C7606800B4D62E /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61081F25C7606800B4D62E /* CellView.swift */; };
-		DC61082525C7619300B4D62E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61082425C7619300B4D62E /* Model.swift */; };
+		DC61082525C7619300B4D62E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61082425C7619300B4D62E /* ViewModel.swift */; };
 		DC61082B25C76D6F00B4D62E /* Mocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61082A25C76D6F00B4D62E /* Mocker.swift */; };
 		DC61083325C7755300B4D62E /* Restful.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61083225C7755300B4D62E /* Restful.swift */; };
-		DC61084125C8257700B4D62E /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61084025C8257700B4D62E /* PullToRefreshView.swift */; };
 		DC61084925C82AA200B4D62E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61084825C82AA200B4D62E /* Weather.swift */; };
 		DCA1F3B425C8CEB900CC4791 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1F3B325C8CEB900CC4791 /* WeatherDetailView.swift */; };
+		DCE60C1D25CB0F8E000CF63E /* DetailTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60C1C25CB0F8E000CF63E /* DetailTemperatureView.swift */; };
+		DCE60C2325CB2E69000CF63E /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60C2225CB2E69000CF63E /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC24CB9225CC8B280043BCE7 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		DC27F67425CB4F2E007C3164 /* OtherMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherMeasurementView.swift; sourceTree = "<group>"; };
+		DC2DF0C325CAC85800366D10 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		DC2DF0C825CAC8DD00366D10 /* CurrentTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTemperatureView.swift; sourceTree = "<group>"; };
 		DC61077125C6F02600B4D62E /* Action Based Events Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Action Based Events Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC61077425C6F02600B4D62E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC61077625C6F02600B4D62E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,12 +79,13 @@
 		DC6107F825C7265300B4D62E /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		DC61081A25C7605700B4D62E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		DC61081F25C7606800B4D62E /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		DC61082425C7619300B4D62E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		DC61082425C7619300B4D62E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DC61082A25C76D6F00B4D62E /* Mocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocker.swift; sourceTree = "<group>"; };
 		DC61083225C7755300B4D62E /* Restful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restful.swift; sourceTree = "<group>"; };
-		DC61084025C8257700B4D62E /* PullToRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
 		DC61084825C82AA200B4D62E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		DCA1F3B325C8CEB900CC4791 /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
+		DCE60C1C25CB0F8E000CF63E /* DetailTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTemperatureView.swift; sourceTree = "<group>"; };
+		DCE60C2225CB2E69000CF63E /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC24CB9925CCA4060043BCE7 /* SwiftUIRefresh in Frameworks */,
 				DC6107D225C6FBA400B4D62E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,7 +168,7 @@
 			children = (
 				DC6107AC25C6F13B00B4D62E /* Device.swift */,
 				DC6107EE25C70B7D00B4D62E /* WeatherTracker.swift */,
-				DC61082425C7619300B4D62E /* Model.swift */,
+				DC61082425C7619300B4D62E /* ViewModel.swift */,
 				DC61082A25C76D6F00B4D62E /* Mocker.swift */,
 				DC61084825C82AA200B4D62E /* Weather.swift */,
 			);
@@ -186,7 +198,6 @@
 			children = (
 				DC61081A25C7605700B4D62E /* ListView.swift */,
 				DC61081F25C7606800B4D62E /* CellView.swift */,
-				DC61084025C8257700B4D62E /* PullToRefreshView.swift */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -203,6 +214,12 @@
 			isa = PBXGroup;
 			children = (
 				DCA1F3B325C8CEB900CC4791 /* WeatherDetailView.swift */,
+				DC2DF0C325CAC85800366D10 /* HeaderView.swift */,
+				DC2DF0C825CAC8DD00366D10 /* CurrentTemperatureView.swift */,
+				DCE60C1C25CB0F8E000CF63E /* DetailTemperatureView.swift */,
+				DCE60C2225CB2E69000CF63E /* BackgroundView.swift */,
+				DC27F67425CB4F2E007C3164 /* OtherMeasurementView.swift */,
+				DC24CB9225CC8B280043BCE7 /* NotificationView.swift */,
 			);
 			path = WeatherDetail;
 			sourceTree = "<group>";
@@ -223,6 +240,9 @@
 			dependencies = (
 			);
 			name = "Action Based Events Sample";
+			packageProductDependencies = (
+				DC24CB9825CCA4060043BCE7 /* SwiftUIRefresh */,
+			);
 			productName = "Action Based Events Sample";
 			productReference = DC61077125C6F02600B4D62E /* Action Based Events Sample.app */;
 			productType = "com.apple.product-type.application";
@@ -294,6 +314,9 @@
 				Base,
 			);
 			mainGroup = DC61076825C6F02600B4D62E;
+			packageReferences = (
+				DC24CB9725CCA4060043BCE7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+			);
 			productRefGroup = DC61077225C6F02600B4D62E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,19 +362,24 @@
 			files = (
 				DC61077525C6F02600B4D62E /* AppDelegate.swift in Sources */,
 				DC61084925C82AA200B4D62E /* Weather.swift in Sources */,
+				DCE60C2325CB2E69000CF63E /* BackgroundView.swift in Sources */,
 				DC61077725C6F02600B4D62E /* SceneDelegate.swift in Sources */,
 				DC6107B825C6F25900B4D62E /* NetworkManager.swift in Sources */,
+				DC27F67525CB4F2E007C3164 /* OtherMeasurementView.swift in Sources */,
 				DC61077925C6F02600B4D62E /* ContentView.swift in Sources */,
+				DC2DF0C925CAC8DD00366D10 /* CurrentTemperatureView.swift in Sources */,
 				DC6107EF25C70B7D00B4D62E /* WeatherTracker.swift in Sources */,
+				DC2DF0C425CAC85800366D10 /* HeaderView.swift in Sources */,
 				DCA1F3B425C8CEB900CC4791 /* WeatherDetailView.swift in Sources */,
+				DC24CB9325CC8B280043BCE7 /* NotificationView.swift in Sources */,
 				DC61082B25C76D6F00B4D62E /* Mocker.swift in Sources */,
 				DC6107AD25C6F13B00B4D62E /* Device.swift in Sources */,
-				DC61082525C7619300B4D62E /* Model.swift in Sources */,
+				DC61082525C7619300B4D62E /* ViewModel.swift in Sources */,
 				DC6107BD25C6F25B00B4D62E /* RestfulModel.swift in Sources */,
 				DC61081B25C7605700B4D62E /* ListView.swift in Sources */,
+				DCE60C1D25CB0F8E000CF63E /* DetailTemperatureView.swift in Sources */,
 				DC61082025C7606800B4D62E /* CellView.swift in Sources */,
 				DC6107DF25C706F900B4D62E /* TabBarView.swift in Sources */,
-				DC61084125C8257700B4D62E /* PullToRefreshView.swift in Sources */,
 				DC61083325C7755300B4D62E /* Restful.swift in Sources */,
 				DC6107EA25C7090800B4D62E /* CreateAlertView.swift in Sources */,
 				DC6107F925C7265300B4D62E /* PrimaryButton.swift in Sources */,
@@ -683,6 +711,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC24CB9725CCA4060043BCE7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC24CB9825CCA4060043BCE7 /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC24CB9725CCA4060043BCE7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC61076925C6F02600B4D62E /* Project object */;
 }

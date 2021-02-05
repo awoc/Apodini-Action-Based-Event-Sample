@@ -4,6 +4,7 @@
 /*.xcodeproj
 xcuserdata/
 
-# Push Notification
-Certificates/
+# Secrets
+Sources/server/Secrets.swift
+Sources/server/Certificates/
 

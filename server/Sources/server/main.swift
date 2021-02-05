@@ -13,7 +13,6 @@ struct Server: WebService {
     }
     
     var configuration: Configuration {
-        EnvironmentObject(httpService, \Keys.httpService)
         HTTPConfiguration()
             .address(.hostname("192.168.178.20", port: 8080))
         
@@ -21,28 +20,12 @@ struct Server: WebService {
         DatabaseConfiguration(.defaultMongoDB("mongodb://localhost:27017/apodini_app"))
             .addMigrations(WeatherMigration())
             .addNotifications()
-        APNSConfiguration(.pem(pemPath: "/Users/awocatmac/Developer/Apodini-Alert-App/server/Certificates/apns.pem"),
-                           topic: "de.tum.in.www1.ios.Action-Based-Events-Sample",
-                           environment: .sandbox)
-        FCMConfiguration("/Users/awocatmac/Developer/Action Based Events Sample/backend/Certificates/fcm.json")
+        APNSConfiguration(.pem(pemPath: apnsPath),
+                          topic: Secrets.bundleIdentifier,
+                          environment: .sandbox)
     }
 }
 
-struct RetrieveWeather: Handler {
-    @Environment(\Keys.httpService) var httpService: HTTPService
-    
-    @Parameter(.http)
-
-    func handle() -> EventLoopFuture<WeatherResponse> {
-        httpService.getWeather(city: "Munich", country: "Germany", measurement: .metric)
-    }
-}
-
-
-struct Keys: EnvironmentAccessible {
-    var httpService: HTTPService
-}
-
-let httpService = HTTPService(filePath: "/Users/awocatmac/Developer/Apodini-Alert-App/server/Certificates/secrets.json")
+let apnsPath = Bundle.module.path(forResource: "apns", ofType: "pem")!
 
 try Server.main()

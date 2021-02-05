@@ -10,10 +10,11 @@ import Foundation
 public struct WeatherResponse: Codable {
     public var weather: [WeatherMain]
     public var main: Temperature
+    public var wind: Wind
 }
 
 public struct WeatherMain: Codable {
-    public var id: String
+    public var id: Int
     public var main: String
     public var description: String
     public var icon: String
@@ -27,3 +28,9 @@ public struct Temperature: Codable {
     public var pressure: Double
     public var humidity: Int
 }
+
+public struct Wind: Codable {
+    public var speed: Double
+    public var deg: Int
+}
+

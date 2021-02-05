@@ -64,12 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Device Token is \(token)")
         
-        let alert = UIAlertController(title: "Device Token", message: "\(token)", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        
-        UIApplication.shared.windows.first!.rootViewController?.present(alert, animated: true)
-        
         let device = Device(id: token, type: .apns, topics: ["general"])
         let restfulModel = RestfulModel()
         
@@ -91,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Check content \(aps["content-available"] as? Int == 1)")
         print("Data \(userInfo["data"] ?? "nothing")")
         
-        let alert = UIAlertController(title: "Notification", message: "Data \(userInfo["data"] ?? "nothing")\nTitle \(aps["alert"])", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Notification", message: "Data \(userInfo["data"] ?? "nothing")\nTitle \(String(describing: aps["alert"]))", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         UIApplication.shared.windows.first!.rootViewController?.present(alert, animated: true)
 

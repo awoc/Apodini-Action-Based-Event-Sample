@@ -22,11 +22,11 @@ public class RestfulModel {
     }()
     
     static var apnsURL: URL = {
-        return baseURL.appendingPathComponent("notifications/device/")
+        return baseURL.appendingPathComponent("notifications").appendingPathComponent("device")
     }()
     
     static var weatherURL: URL = {
-        return baseURL.appendingPathComponent("weather/")
+        return baseURL.appendingPathComponent("weather")
     }()
     
     public func register(device: Device) {
@@ -35,7 +35,15 @@ public class RestfulModel {
     }
     
     public func getWeather(city: String, country: String, measurement: Measurement) -> AnyPublisher<WeatherResponse, Error> {
-        let route = RestfulModel.weatherURL.appendingPathComponent("?city=\(city)&country=\(country)&measurement=\(measurement.rawValue)")
-        return NetworkManager.get(on: route, WeatherResponse.self)
+        guard var urlComponent = URLComponents(string:  RestfulModel.weatherURL.absoluteString) else {
+            fatalError()
+        }
+        let queryCity = URLQueryItem(name: "city", value: city)
+        let queryCountry = URLQueryItem(name: "country", value: country)
+        let queryMeasurement = URLQueryItem(name: "measurement", value:  measurement.rawValue)
+        
+        urlComponent.queryItems = [queryCity, queryCountry, queryMeasurement]
+
+        return NetworkManager.get(on: urlComponent.url!, WeatherResponse.self)
     }
 }

@@ -32,7 +32,10 @@ struct CellView: View {
 struct FlagService {
     let countries = [
         "Germany": "🇩🇪",
+        "Austria": "🇦🇹",
+        "Switzerland": "🇨🇭",
         "United Kingdom": "🇬🇧",
+        "UK": "🇬🇧",
         "USA": "🇺🇸"
     ]
     

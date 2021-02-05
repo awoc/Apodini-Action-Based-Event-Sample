@@ -6,23 +6,30 @@ import Apodini
 struct HTTPService {
     let httpClient: HTTPClient
     let apiKey: String
+    let baseURL: String
     
     @Throws(.notFound, reason: "Couldn't find object") var requestError: ApodiniError
     
-    init(filePath: String) {
-        guard let data = FileManager.default.contents(atPath: filePath),
-              let secrets = try? JSONDecoder().decode(Secrets.self, from: data)  else {
-            fatalError("Could not find api Key")
-        }
-        self.apiKey = secrets.api
-        httpClient = HTTPClient(eventLoopGroupProvider: .createNew)
+    init(app: Application) {
+        self.apiKey = Secrets.api
+        self.baseURL = "http://api.openweathermap.org/data/2.5/weather"
+        httpClient = HTTPClient(eventLoopGroupProvider: .shared(app.eventLoopGroup))
     }
     
     func getWeather(city: String, country: String, measurement: Measurement) -> EventLoopFuture<WeatherResponse> {
-        let url = "http://api.openweathermap.org/data/2.5/weather?q=\(city),\(country)&appid=\(apiKey)&units=metric"
+        guard var urlComponent = URLComponents(string: baseURL) else {
+            fatalError("Couldn't create URL")
+        }
+        let queryCity = URLQueryItem(name: "q", value: "\(city),\(country)")
+        let queryAPIKey = URLQueryItem(name: "appid", value: apiKey)
+        let queryMeasurement = URLQueryItem(name: "units", value: measurement.rawValue)
+        
+        urlComponent.queryItems = [queryCity, queryAPIKey, queryMeasurement]
+
         return httpClient
-            .get(url: url)
+            .get(url: urlComponent.string!)
             .flatMapThrowing { response -> WeatherResponse in
+
                 guard response.status == .ok, let body = response.body else {
                     throw requestError
                 }
@@ -31,5 +38,21 @@ struct HTTPService {
                 return weatherResponse
             }
             
+    }
+}
+
+extension Application {
+    var httpService: HTTPService {
+        if let storedHTTPService = self.storage[HTTPConfigurationKey.self] {
+            return storedHTTPService
+        }
+        let newHTTPService = HTTPService(app: self)
+        self.storage[HTTPConfigurationKey.self] = newHTTPService
+        
+        return newHTTPService
+    }
+    
+    struct HTTPConfigurationKey: StorageKey {
+        typealias Value = HTTPService
     }
 }

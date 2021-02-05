@@ -14,8 +14,6 @@ import Combine
 enum NetworkManager {
     /// The `AnyCancellable`s that are used to track network requests made by the `NetworkManager`
     static var cancellables: Set<AnyCancellable> = []
-    /// The default `Authorization` header field for requests made by the `NetworkManager`
-    static var authorization: String?
     
     /// The `JSONEncoder` that is used to encode request bodies to JSON
     static var encoder: JSONEncoder = {
@@ -41,26 +39,20 @@ enum NetworkManager {
     /// - Returns: The created `URLRequest`
     static func urlRequest(_ method: String,
                            url: URL,
-                           authorization: String? = authorization,
                            body: Data? = nil) -> URLRequest {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
         
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let authorization = authorization {
-            urlRequest.addValue(authorization, forHTTPHeaderField: "Authorization")
-        }
         
         urlRequest.httpBody = body
         
         return urlRequest
     }
     
-    static func getElement<Element: Decodable>(on route: URL,
-                                               authorization: String? = authorization) -> AnyPublisher<Element, Error> {
-        print("The Element ist \(RESTResponse<Element>.self)")
+    static func getElement<Element: Decodable>(on route: URL) -> AnyPublisher<Element, Error> {
         return URLSession.shared.dataTaskPublisher(for:
-                                                    urlRequest("GET", url: route, authorization: authorization)
+                                                    urlRequest("GET", url: route)
         )
         .map(\.data)
         .decode(type: RESTResponse<Element>.self, decoder: decoder)
@@ -69,24 +61,18 @@ enum NetworkManager {
         .eraseToAnyPublisher()
     }
     
-    static func getElements<Element: Decodable>(on route: URL,
-                                                authorization: String? = authorization) -> AnyPublisher<[Element], Error> {
-        getElement(on: route, authorization: authorization)
+    static func getElements<Element: Decodable>(on route: URL) -> AnyPublisher<[Element], Error> {
+        getElement(on: route)
             .eraseToAnyPublisher()
     }
     
-    static func get<Element: Decodable>(on route: URL,
-                                        _ element: Element.Type,
-                                        authorization: String? = authorization) -> AnyPublisher<Element, Error> {
-        print()
-        return getElement(on: route, authorization: authorization)
+    static func get<Element: Decodable>(on route: URL, _ element: Element.Type) -> AnyPublisher<Element, Error> {
+        return getElement(on: route)
             .eraseToAnyPublisher()
     }
     
-    static func post<T: Codable>(_ element: T,
-                                 authorization: String? = authorization,
-                                 on route: URL) {
-        let request = urlRequest("POST", url: route, authorization: authorization, body: try? encoder.encode(element))
+    static func post<T: Codable>(_ element: T, on route: URL) {
+        let request = urlRequest("POST", url: route, body: try? encoder.encode(element))
         let task = URLSession.shared.dataTask(with: request) { _, _, error in
             if let error = error {
                 print("error \(error)")
@@ -97,12 +83,8 @@ enum NetworkManager {
         task.resume()
     }
     
-    static func postElement<Element: Codable>(_ element: Element,
-                                              authorization: String? = authorization,
-                                              on route: URL) -> AnyPublisher<Element, Error> {
-        URLSession.shared.dataTaskPublisher(for:
-                                                urlRequest("POST", url: route, authorization: authorization, body: try? encoder.encode(element))
-        )
+    static func postElement<Element: Codable>(_ element: Element, on route: URL) -> AnyPublisher<Element, Error> {
+        URLSession.shared.dataTaskPublisher(for:urlRequest("POST", url: route, body: try? encoder.encode(element)))
         .map(\.data)
         .decode(type: RESTResponse<Element>.self, decoder: decoder)
         .map(\.data)
@@ -110,23 +92,16 @@ enum NetworkManager {
         .eraseToAnyPublisher()
     }
     
-    static func putElement<T: Codable>(_ element: T,
-                                       authorization: String? = authorization,
-                                       on route: URL) -> AnyPublisher<T, Error> {
-        URLSession.shared.dataTaskPublisher(for:
-                                                urlRequest("PUT", url: route, authorization: authorization, body: try? encoder.encode(element))
-        )
+    static func putElement<T: Codable>(_ element: T, on route: URL) -> AnyPublisher<T, Error> {
+        URLSession.shared.dataTaskPublisher(for:urlRequest("PUT", url: route, body: try? encoder.encode(element)))
         .map(\.data)
         .decode(type: T.self, decoder: NetworkManager.decoder)
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
     
-    static func delete(at route: URL,
-                       authorization: String? = authorization) -> AnyPublisher<Void, Error> {
-        URLSession.shared.dataTaskPublisher(for:
-                                                urlRequest("DELETE", url: route, authorization: authorization)
-        )
+    static func delete(at route: URL) -> AnyPublisher<Void, Error> {
+        URLSession.shared.dataTaskPublisher(for:urlRequest("DELETE", url: route))
         .tryMap { _, response in
             guard let response = response as? HTTPURLResponse, 200..<299 ~= response.statusCode else {
                 throw URLError(.cannotRemoveFile)

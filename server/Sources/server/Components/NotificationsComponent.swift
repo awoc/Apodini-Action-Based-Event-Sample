@@ -47,12 +47,12 @@ struct GetAllDevices: Handler {
     }
 }
 
-//extension Device: Content {}
-
 struct SendSample: Handler {
     @Environment(\.logger) var logger: Logger
     
     @Environment(\.notificationCenter) var notificationCenter: NotificationCenter
+    
+    @Throws(.notFound, reason: "Couldn't find object") var requestError: ApodiniError
     
     func handle() -> EventLoopFuture<String> {
         logger.info("Sending sample notification")
