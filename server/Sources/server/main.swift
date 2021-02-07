@@ -1,8 +1,9 @@
-import Notifications
-import Jobs
+import ApodiniNotifications
 import Apodini
 import NIO
 import Foundation
+import ApodiniOpenAPI
+import ApodiniREST
 import ApodiniDatabase
 
 struct Server: WebService {    
@@ -15,6 +16,10 @@ struct Server: WebService {
     var configuration: Configuration {
         HTTPConfiguration()
             .address(.hostname("192.168.178.20", port: 8080))
+        
+        ExporterConfiguration()
+                .exporter(RESTInterfaceExporter.self)
+                .exporter(OpenAPIInterfaceExporter.self)
         
         // Notifications
         DatabaseConfiguration(.defaultMongoDB("mongodb://localhost:27017/apodini_app"))

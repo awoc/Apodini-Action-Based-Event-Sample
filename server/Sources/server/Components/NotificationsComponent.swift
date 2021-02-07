@@ -1,5 +1,5 @@
 import Apodini
-import Notifications
+import ApodiniNotifications
 import Logging
 import NIO
 

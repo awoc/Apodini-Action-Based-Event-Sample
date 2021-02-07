@@ -27,9 +27,11 @@ let package = Package(
             name: "server",
             dependencies: [
                 .product(name: "Apodini", package: "Apodini"),
-                .product(name: "Jobs", package: "Apodini"),
-                .product(name: "Notifications", package: "Apodini"),
+                .product(name: "ApodiniJobs", package: "Apodini"),
+                .product(name: "ApodiniNotifications", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
+                .product(name: "ApodiniREST", package: "Apodini"),
+                .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client")
             ],
             resources: [

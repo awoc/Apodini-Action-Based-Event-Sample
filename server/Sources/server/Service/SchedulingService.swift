@@ -1,5 +1,5 @@
 import Apodini
-import Jobs
+import ApodiniJobs
 import Foundation
 import Logging
 

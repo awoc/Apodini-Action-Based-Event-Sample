@@ -1,5 +1,5 @@
 import Apodini
-import Notifications
+import ApodiniNotifications
 
 struct NotificationService {
     let notificationCenter: NotificationCenter

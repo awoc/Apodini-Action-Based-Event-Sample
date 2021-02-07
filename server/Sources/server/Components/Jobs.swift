@@ -1,4 +1,4 @@
-import Jobs
+import ApodiniJobs
 import Apodini
 
 struct WeatherAlert: Job {
